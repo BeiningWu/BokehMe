@@ -143,9 +143,9 @@ iunet = IUNet(args.iunet_shuffle_rate, args.iunet_in_channels, args.iunet_out_ch
 arnet.cuda()
 iunet.cuda()
 
-checkpoint = torch.load(arnet_checkpoint_path)
+checkpoint = torch.load(arnet_checkpoint_path, weights_only=False)
 arnet.load_state_dict(checkpoint['model'])
-checkpoint = torch.load(iunet_checkpoint_path)
+checkpoint = torch.load(iunet_checkpoint_path, weights_only=False)
 iunet.load_state_dict(checkpoint['model'])
 
 arnet.eval()

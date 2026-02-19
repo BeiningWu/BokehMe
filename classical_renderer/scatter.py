@@ -113,7 +113,8 @@ def cupy_kernel(strFunction, objVariables):
 # @cupy.util.memoize(for_each_device=True)
 @cupy.memoize(for_each_device=True)
 def cupy_launch(strFunction, strKernel):
-    return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
+    return cupy.RawModule(code=strKernel).get_function(strFunction)
+    # return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
 # end
 
 
@@ -138,7 +139,7 @@ class _FunctionRender(torch.autograd.Function):
                 grid=tuple([int((n + 512 - 1) / 512), 1, 1]),
                 block=tuple([512, 1, 1]),
                 args=[
-                    cupy.int(n),
+                    cupy.int32(n),
                     image.data_ptr(),
                     defocus.data_ptr(),
                     defocus_dilate.data_ptr(),

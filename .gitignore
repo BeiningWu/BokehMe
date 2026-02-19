@@ -1,0 +1,6 @@
+**/__pycache__/
+.vscode
+webdataset_shards
+outputs_decision
+outputs
+outputs_wds
